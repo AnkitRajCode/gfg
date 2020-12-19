@@ -1,0 +1,190 @@
+*,html,body{
+	margin:0px;
+	padding:0px;
+}
+
+
+/* ------------------------------------------ */
+
+			/* Web-Dev-Section */ 
+
+/* ------------------------------------------ */
+*{
+    font-family: 'PT Sans', sans-serif;
+}
+.web-dev-section {
+	margin-top: 100px;
+}
+.img{
+	width: 500px;
+	height: 600px;
+}
+.web-dev-left-img {
+	width: 50%;
+	padding: 20px;
+}
+.web-dev-right-img {
+	margin-top: 0px;
+	width: 50%;
+	padding: 0px 50px;
+	/* border: 1px solid black; */
+}
+.img {
+	margin-top:0px;
+	border-radius: 5px;
+	/* border: 1px solid black; */
+}
+.web-dev-row {
+	padding-left: 100px;
+	margin-top: 80px;
+}
+.web-dev-data {
+	margin-top: 80px;
+	/* border: 1px solid black; */
+}
+.list-web-dev {
+	padding-left: 40px;
+	line-height: 0.8;
+	border-right: 2px solid gray;
+	padding-bottom: 60px;
+	/* border: 1px solid black; */
+
+}
+.title{
+	text-align: center;
+	margin-bottom: 150px;
+}
+.icon {
+	position: absolute;
+	top: 420px;
+	padding: 0px;
+	margin: 0px;
+	padding-left: 212px;
+}
+.icon-white {
+	border: 1px solid gray;
+	border-radius:20px;
+	text-shadow: 2px 2px 2px #000000;
+	color: white;
+}
+#txt-last{
+	color: white;
+	font-weight: bold;
+	/* border: 3px solid black; */
+	/* position: relative; */
+	/* transform: translate(-50%, -50%); */
+	z-index: 3;
+	width: 100%;
+	height:100%;
+	padding: 20px;
+	backdrop-filter:blur(10px);
+	/* text-align: center; */
+}
+.last{
+	/* margin:0px;
+	padding:0px; */
+    background-image:url("img/swirlliq.png");
+    background-size: cover;
+	background-repeat: no-repeat;
+	/* opacity:0.8; */
+	z-index:1;
+	width:100vw;
+    height:100vh;
+    font-weight:bold;
+	color:white;
+	/* -webkit-filter:blur(8px);  */
+	overflow-y:hidden;
+}
+.round{
+	border-radius: 10px;
+}
+.transparent{
+	opacity:0.5;
+	/* color:inherit; */
+}
+.form-control{
+	width:26vw;
+}
+.btn{
+	position:relative;
+	z-index:10;
+	background-color:lightcyan;
+	border-radius:40px;
+	opacity:0.5;
+	bottom:20px;
+	right:50px;
+}
+.btn:hover{
+	opacity:0.8;
+	background-color:aquamarine;
+	transition-delay: 0.2s;
+	transition-duration: 1s;
+}
+.txt-area{
+	/* border:2px black solid; */
+	width:fit-content;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#about_us{
+	color: white;
+	font-weight: 200;
+	padding-left:45%;
+	padding-top:15%;
+	padding-right:5%;
+}
+#sample_heading_text{
+	padding-left:10%;
+	padding-right:60%;
+}
+nav{
+	letter-spacing: 1.5px;
+	margin: 0 10px;
+}
+#pink_background{
+	overflow-x: hidden;
+	background-image: url("img/swirl_liq.svg");
+	background-image: cover;
+	background-repeat: no-repeat;
+	opacity:0.9;
+	width:100%;
+	height:100%;
+}
+
+#web{
+  	height: 50vh;
+}
+.vertical { 
+			float:right;
+			width:40%;
+        }
+.nav-link{
+	margin: 0px 10px 0px 10px;
+}
+
+.vertical2{
+	padding-top:8%;
+	padding-left:8%;
+}
+.thumbnail2{
+	position:absolute;
+	width:50%;
+	height:400px;
+	object-fit:cover;
+	float:right;
+	padding-right:10%;
+}

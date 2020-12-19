@@ -1,0 +1,101 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.logosocial{
+    width: 20px;
+    margin-left: 2%;
+}
+.uk-card{
+    width: 420px;
+    padding: 15px;
+    float: left;
+}
+.uk-card-title{
+    color: #bc2a8d;
+    font-weight: 600;
+}
+.dpcm{
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+.dpshow{
+    width: 200px;
+    height: 210px;
+    border-radius: 50%;
+}
+.introcm{
+    width: 44%;
+    padding: 3%;
+    float: left;
+}
+.hr{
+    width: 90%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: gray;
+    height: 1px;
+    float: left;
+}
+.talkcm{
+    margin-top: 10px;
+}
+/*member*/
+.member{
+    float: left;
+    width: 250px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.23);
+    transition: 0.6s ease;
+    margin-bottom:20px;
+    margin-left: 2%;
+}
+.member:hover{
+    box-shadow: 2px 2px 6px rgba(128, 128, 128, 0.23);
+}
+
+.member_dp{
+    width: 40px;
+    height: 40px;
+    float: left;
+    border-radius: 50%;
+}
+.membername{
+    float:left;
+    margin-left: 1rem;
+    margin-top: 0.4rem;
+    font-weight: 500;
+}
+.menu{
+    height: 20px;
+    margin-top: 0.6rem;
+    float: right;
+    cursor: pointer;
+}
+.memberDetaildropdown{
+  position: relative;
+}
+.dropdown_detail {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.member:hover .dropdown_detail {display: block;}
+
+.memberdetailcard{
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+    padding: 10px;
+}
+.membernameincard{
+    color: #bc2a8d;
+    font-weight: 500;
+}

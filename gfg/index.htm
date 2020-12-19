@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=PT+Sans+Narrow&display=swap" rel="stylesheet">
+    <!-- logo -->
+    <link rel="icon" href="icons/logo.png">
+    <!-- page title -->
+   <title>Geeksforgeeks | KIIT</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/index.css" type="text/css">
+    <!-- CDN -->
+   <script src="js/landing.js" defer></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+   <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/PixiPlugin.min.js?r=3"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi-filters/1.0.6/filters.min.js"></script>
+</head>
+<body>
+   <div id="header">
+        <nav>
+            <div class="navbar-brand">Geeksforgeeks || KIIT Student Chapter</div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </nav>
+   </div>
+   <div class="blend-mode"></div>
+   <canvas id="stage"></canvas>
+   <h1 id="upcomingEvent">Upcoming Event</h1>
+    <div id="event">
+       <div id="event_img">
+           <img src="image/imgTest.jpg">
+       </div>
+        <div id="event_context">
+            <div id="event_content">
+                <div id="event_title">Event Title</div>
+                <div id="event_desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ducimus, amet voluptates, impedit iusto natus cupiditate, dolor, similique quaerat ut magni soluta libero asperiores laudantium obcaecati accusantium. Eligendi, ipsa, expedita! Lorem ipsum dolor sit amet, consectetur adipisicing elit. In amet eaque distinctio porro totam, facilis eos velit dignissimos, aspernatur quisquam deleniti quaerat id alias temporibus dolor ipsum maxime? Animi, dicta!</div>
+            </div>
+            <a href="#" id="event_button">Register Now</a>
+        </div>
+    </div>
+    <h1 id="upcomingEvent">Projects</h1>
+    <div id="projects">
+        <a href="#" class="project_card">
+            <div class="project_img">
+                <img src="image/imgTest.jpg">
+            </div>
+            <div class="project_title">Project Title</div>
+            <div class="project_desc">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi alias natus impedit beatae et! Corporis reprehenderit, quam optio quidem illo.
+            </div>
+        </a>
+        <a href="#" class="project_card">
+            <div class="project_img">
+                <img src="image/imgTest.jpg">
+            </div>
+            <div class="project_title">Project Title</div>
+            <div class="project_desc">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi alias natus impedit beatae et! Corporis reprehenderit, quam optio quidem illo.
+            </div>
+        </a>
+        <a href="#" class="project_card">
+            <div class="project_img">
+                <img src="image/imgTest.jpg">
+            </div>
+            <div class="project_title">Project Title</div>
+            <div class="project_desc">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi alias natus impedit beatae et! Corporis reprehenderit, quam optio quidem illo.
+            </div>
+        </a>
+    </div>
+    <div id="landing_page_style">
+        <img src="image/style.png">
+    </div>
+    <script id="bulgeVert" type="x-shader/x-vertex">
+
+      attribute vec2 aVertexPosition;
+      attribute vec2 aTextureCoord;
+
+      uniform mat3 projectionMatrix;
+      varying vec2 vTextureCoord;
+
+      void main(void){
+        gl_Position = vec4((projectionMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);
+        vTextureCoord = aTextureCoord;
+      }
+    </script>
+    <script id="bulgeFrag" type="x-shader/x-vertex">
+
+      varying vec2 vTextureCoord;
+      uniform sampler2D uSampler;
+      uniform float radius;
+      uniform float strength;
+      uniform vec2 center;
+      uniform vec4 dimensions;
+      uniform vec4 filterArea;
+
+      vec2 mapCoord(vec2 coord) {
+        coord *= filterArea.xy;
+        coord += filterArea.zw;
+        return coord;
+      }
+
+      vec2 unmapCoord(vec2 coord) {
+        coord -= filterArea.zw;
+        coord /= filterArea.xy;
+        return coord;
+      }
+
+      vec2 bulge(vec2 coord) {
+
+        coord -= center;
+
+        float distance = length(coord);
+
+        if (distance < radius) {
+          float percent = distance / radius;
+          if (strength > 0.0) {
+            coord *= mix(1.0, smoothstep(0.0, radius / distance, percent), strength * 0.75);
+          } else {
+            coord *= mix(1.0, pow(percent, 1.0 + strength * 0.75) * radius / distance, 1.0 - percent);
+          }
+        }
+
+        coord += center;
+
+        return coord;
+      }
+
+      void main(void) {
+
+        vec2 coord = mapCoord(vTextureCoord);
+        coord = bulge(coord);
+        vec2 clampedCoord = clamp(coord, vec2(0.0), filterArea.xy);
+        coord = unmapCoord(coord);
+
+        gl_FragColor = texture2D(uSampler, coord);
+        if (coord != clampedCoord) {
+          gl_FragColor.a *= max(0.0, 1.0 - length(coord - clampedCoord));
+        }
+      }
+    </script>
+    <script id="marbleFrag" type="x-shader/x-vertex">
+
+      precision mediump float;
+      uniform vec2  resolution;
+      uniform float time;
+      uniform vec2  mouse;
+      uniform float alpha;
+      uniform float fluid_speed;
+      uniform float color_intensity;
+
+      uniform vec2 size;
+      uniform vec4 dimensions;
+      uniform vec4 filterArea;
+
+      const int   complexity   = 40;   // More points of color.
+      const float mouse_factor = 25.0; // Makes it more/less jumpy.
+      const float mouse_offset = 5.0;  // Drives complexity in the amount of curls/cuves.  Zero is a single whirlpool.
+
+      const float Pi = 3.14159;
+
+      float sinApprox(float x) {
+        x = Pi + (2.0 * Pi) * floor(x / (2.0 * Pi)) - x;
+        return (4.0 / Pi) * x - (4.0 / Pi / Pi) * x * abs(x);
+      }
+
+      float cosApprox(float x) {
+        return sinApprox(x + 0.5 * Pi);
+      }
+
+      void main(void) {
+        vec2 p = (2.0 * gl_FragCoord.xy - resolution) / max(resolution.x, resolution.y);
+        for(int i = 1; i < complexity; i++) {
+          vec2 newp = p;
+          newp.x += 0.6 / float(i) * sin(float(i) * p.y + time / fluid_speed + 0.3 * float(i)) + mouse.y / mouse_factor + mouse_offset;
+          newp.y += 0.6 / float(i) * sin(float(i) * p.x + time / fluid_speed + 0.3 * float(i+10)) - mouse.x / mouse_factor + mouse_offset;
+          p = newp;
+        }
+        vec3 col = vec3(color_intensity * sin(3.0 * p.x) + color_intensity,color_intensity * sin(3.0 * p.y) + color_intensity,color_intensity * sin(p.x + p.y) + color_intensity);
+        gl_FragColor = vec4(col, alpha);
+      }
+    </script>
+</body>
+</html>
